@@ -39,12 +39,12 @@ export class DataSelection extends React.Component<DataSelectionProps, DataSelec
       <div className="DataSelection">
         Symbol:
         {' '}
-        <select className={myCss.symbolSelect} onChange={this.handleSymbolChange}>
+        <select className={myCss.symbolSelect} data-testid="symbolSelect" onChange={this.handleSymbolChange}>
           {this.state.symbols.map((symbol) => <option key={symbol}>{symbol}</option>)}
         </select>
         Interval:
         {' '}
-        <select className={myCss.intervalSelect} onChange={this.handleIntervalChange}>
+        <select className={myCss.intervalSelect} data-testid="intervalSelect" onChange={this.handleIntervalChange}>
           {this.state.intervals.map((interval) => <option key={interval}>{interval}</option>)}
         </select>
       </div>

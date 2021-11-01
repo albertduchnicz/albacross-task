@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --config webpack.dev.config.ts",
     "build": "webpack --config webpack.prod.config.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
   },
   "author": "Albert Duchnicz",
   "license": "ISC",
@@ -25,23 +26,30 @@
     "@babel/preset-react": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
     "@babel/runtime": "^7.16.0",
+    "@testing-library/react": "^12.1.2",
     "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
     "@types/mini-css-extract-plugin": "^2.4.0",
     "@types/react": "^17.0.33",
     "@types/react-color": "^3.0.6",
     "@types/react-dom": "^17.0.10",
     "@types/webpack-dev-server": "^4.3.1",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "@typescript-eslint/parser": "^5.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.0",
     "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-webpack-plugin": "^3.1.0",
     "fork-ts-checker-webpack-plugin": "^6.4.0",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.3.1",
     "mini-css-extract-plugin": "^2.4.3",
     "style-loader": "^3.3.1",
     "ts-node": "^10.4.0",
@@ -49,5 +57,12 @@
     "webpack": "^5.61.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "testEnvironment": "jsdom"
   }
 }

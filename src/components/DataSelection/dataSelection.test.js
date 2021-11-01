@@ -1,6 +1,7 @@
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
-import { fireEvent } from "@testing-library/react";
+import React from 'react';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
+import { fireEvent } from '@testing-library/react';
 import { BinanceDataProvider } from '../../services/binanceDataProvider';
 import { DataSelection } from './dataSelection';
 
@@ -13,13 +14,14 @@ const dataProvider = new BinanceDataProvider();
 
 beforeEach(() => {
   // setup a DOM element as a render target
-  container = document.createElement("div");
+  container = document.createElement('div');
   document.body.appendChild(container);
   BinanceDataProvider.mockClear();
 });
 
 afterEach(() => {
   // cleanup on exiting
+  unmountComponentAtNode(container);
   document.body.removeChild(container);
   container = null;
 });
@@ -31,9 +33,9 @@ it('checks if compoment gets initialized', async () => {
   act(() => {
     render(<DataSelection dataSource={dataProvider} onSymbolChange={handleSymbolChange} onIntervalChange={handleIntervalChange} />, container);
   });
-  const symbolsSelect = await container.querySelector('select.SymbolSelect');
+  const symbolsSelect = await container.querySelector('select[data-testid=symbolSelect]');
   expect(symbolsSelect.options.length).toBe(LIST_OF_SYMBOLS.length);
-  const intervalsSelect = await container.querySelector('select.IntervalSelect');
+  const intervalsSelect = await container.querySelector('select[data-testid=intervalSelect]');
   expect(intervalsSelect.options.length).toBe(LIST_OF_INTERVALS.length);
   expect(handleSymbolChange).toHaveBeenCalledTimes(1);
   expect(handleIntervalChange).toHaveBeenCalledTimes(1);
@@ -45,11 +47,11 @@ it('checks if symbol can be changed and onSymbolChange and onIntervalChange get 
   act(() => {
     render(<DataSelection dataSource={dataProvider} onSymbolChange={handleSymbolChange} onIntervalChange={handleIntervalChange} />, container);
   });
-  const select = await container.querySelector('select.SymbolSelect');
-  fireEvent.change(select, {target: {value: LIST_OF_SYMBOLS[1]}});
+  const select = await container.querySelector('select[data-testid=symbolSelect]');
+  fireEvent.change(select, { target: { value: LIST_OF_SYMBOLS[1] } });
   expect(handleSymbolChange).toHaveBeenCalledWith(LIST_OF_SYMBOLS[1]);
   expect(handleSymbolChange).toHaveBeenCalledTimes(2);
-  fireEvent.change(select, {target: {value: LIST_OF_SYMBOLS[2]}});
+  fireEvent.change(select, { target: { value: LIST_OF_SYMBOLS[2] } });
   expect(handleSymbolChange).toHaveBeenCalledWith(LIST_OF_SYMBOLS[2]);
   expect(handleSymbolChange).toHaveBeenCalledTimes(3);
   expect(handleIntervalChange).toHaveBeenCalledTimes(1);
@@ -61,11 +63,11 @@ it('checks if interval can be changed and onSymbolChange and onIntervalChange ge
   act(() => {
     render(<DataSelection dataSource={dataProvider} onSymbolChange={handleSymbolChange} onIntervalChange={handleIntervalChange} />, container);
   });
-  const select = await container.querySelector('select.IntervalSelect');
-  fireEvent.change(select, {target: {value: LIST_OF_INTERVALS[1]}});
+  const select = await container.querySelector('select[data-testid=intervalSelect]');
+  fireEvent.change(select, { target: { value: LIST_OF_INTERVALS[1] } });
   expect(handleIntervalChange).toHaveBeenCalledWith(LIST_OF_INTERVALS[1]);
   expect(handleIntervalChange).toHaveBeenCalledTimes(2);
-  fireEvent.change(select, {target: {value: LIST_OF_INTERVALS[2]}});
+  fireEvent.change(select, { target: { value: LIST_OF_INTERVALS[2] } });
   expect(handleIntervalChange).toHaveBeenCalledWith(LIST_OF_INTERVALS[2]);
   expect(handleIntervalChange).toHaveBeenCalledTimes(3);
   expect(handleSymbolChange).toHaveBeenCalledTimes(1);
