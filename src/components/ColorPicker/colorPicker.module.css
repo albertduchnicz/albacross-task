@@ -1,0 +1,17 @@
+.toggleButton {
+  background: url('color-picker.png');
+  background-size: cover;
+  height: 25px;
+  width: 25px;
+}
+.popover {
+  position: absolute;
+  z-index: 2;
+};
+.cover {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+};
