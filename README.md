@@ -21,19 +21,18 @@ The application lists all cryptocurrency pairs (dynamically loaded) traded on Bi
 * 1h - 1 hour
 * 1d - 1 day
 
-Prices are fetched on the fly from Binance API every time a currency pair or time interval updates. Additionaly a color picker is used for changing the chart color to demonstrate interaction with data on screen.
+Prices are fetched on the fly from Binance API every time the selected currency pair or time interval changes. Additionaly a color picker is used for changing the chart color to demonstrate interaction with data on screen.
 
 A few automated tests are included. All API calls in tests are mocked.
 
 Webpack configuration is also included.
 
 ## Tech stack used
-
 * `Node.js`
 * `React`
 * `TypeScript` with `Babel` compiler
-* `Webpack 5`
-* `ESLint` for static code analysis and styling
+* `Webpack`
+* `ESLint` for static code analysis and code styling
 * `Jest` for automated testing
 
 Node.js + React + TypeScript make a perfect full-stack for building a modern, scalable, and high-quality web applications. Webpack helps to deploy large scale projects. It has been used in this project mainly for demostration. ESLint performs static code analysis to spot errors at an early stage and watches code style guidelines. Finally Jest runs automatic tests making sure the app won't break after a new feature is implemented.
@@ -41,11 +40,14 @@ Node.js + React + TypeScript make a perfect full-stack for building a modern, sc
 
 Pros:
 * a mix of modern, well regarded technologies
-* full development environment
+* full frontend end backend development environment
 * TypeScript client and server side
-* deployment tool with dev and prod configuration
+* deployment script with dev and prod configuration
 * well structured project
 * testing environment ready
+* code linting script
+* code styling script
+
 Cons:
 * setup seems well over a small project requirements
 * maintenance of project's configuration may be a headache with so many config files 
@@ -56,7 +58,6 @@ Future improvements:
 * database for caching Binance data
 
 ## Installation, building and testing
-
 Get the code from Github repo and install required modules
 ```
 $ npm install
