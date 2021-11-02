@@ -8,32 +8,31 @@ type MyChartProps = {
   interval: string,
   color: string,
   dataSource: DataSource
-}
+};
 type ChartState = {
   labels: string[],
   prices: number[]
-}
+};
 
 export class MyChart extends React.Component<MyChartProps, ChartState> {
+  state = {
+    labels: [],
+    prices: [],
+  };
+
   constructor(props: MyChartProps) {
     super(props);
-    this.state = {
-      labels: [],
-      prices: [],
-    };
     this.myChartRef = createRef();
   }
 
-    state: ChartState;
-
-    async componentDidUpdate(prevProps: MyChartProps): Promise<void> {
-      if (prevProps.symbol !== this.props.symbol || prevProps.interval !== this.props.interval) {
-        await this.reloadChart();
-      }
-      if (prevProps.color !== this.props.color && this.state.prices.length > 0) {
-        this.changeColor(this.props.color);
-      }
+  async componentDidUpdate(prevProps: MyChartProps): Promise<void> {
+    if (prevProps.symbol !== this.props.symbol || prevProps.interval !== this.props.interval) {
+      await this.reloadChart();
     }
+    if (prevProps.color !== this.props.color && this.state.prices.length > 0) {
+      this.changeColor(this.props.color);
+    }
+  }
   // eslint-disable-next-line
   private myChartRef: any;
 

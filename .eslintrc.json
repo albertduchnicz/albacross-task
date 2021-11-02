@@ -2,26 +2,49 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
   },
   "plugins": [
     "@typescript-eslint",
     "react-hooks",
-    "html"
+    "html",
+    "jest"
   ],
   "extends": [
     "plugin:react/recommended",
+    "airbnb",
+    "airbnb-typescript",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "import/prefer-default-export": "off",
+    "react/destructuring-assignment": ["error", "never", { "ignoreClassFields": true }],
+    "react/state-in-constructor" : ["error", "never"],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies":["**/webpack.*.ts", "**/*.test.ts", "**/*.test.tsx"]}],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
   },
   "settings": {
     "react": {
       "pragma": "React",
       "version": "detect"
-    }
+    },
+    "import/resolver": {
+      "typescript": {}
+    },
+    "ignorePatterns": [".eslintrc.js"]
+  },
+  "env": {
+    "jest/globals": true
   }
 }

@@ -4,30 +4,30 @@ import myCss from './colorPicker.module.css';
 
 type ColorPickerState = {
   display: boolean
-}
+};
 type ColorPickerProps = {
   onColorChange: (hexcode: string) => void
-}
+};
 export class ColorPicker extends React.Component<ColorPickerProps, ColorPickerState> {
   state = {
     display: false,
   };
 
-  handleClick = () => {
+  handleClick = (): void => {
     this.setState((prevState) => ({ display: !prevState.display }));
-  }
+  };
 
-  handleKeyDown = () => {
+  handleKeyDown = (): void => {
     this.handleClick();
-  }
+  };
 
-  handleClose = () => {
+  handleClose = (): void => {
     this.setState({ display: false });
-  }
+  };
   // eslint-disable-next-line
   handleChange = (color: any) => {
     this.props.onColorChange(color.hex.toUpperCase());
-  }
+  };
 
   render(): React.ReactNode {
     return (

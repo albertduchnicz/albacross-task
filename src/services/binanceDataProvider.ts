@@ -17,7 +17,7 @@ export class BinanceDataProvider implements DataSource {
   }
 
   async fetchPrices(symbol: string, interval: string):
-    Promise<{timestamps: string[], prices: number[]}> {
+  Promise<{ timestamps: string[], prices: number[] }> {
     if (symbol === '' || interval === '') {
       return Promise.reject();
     }
@@ -39,7 +39,7 @@ export class BinanceDataProvider implements DataSource {
         timestamps.push(formattedDate);
         prices.push(parseFloat(klines[i][4]));
       }
-      return Promise.resolve({ timestamps, prices });
+      return await Promise.resolve({ timestamps, prices });
     } catch (e) {
       return Promise.reject(e);
     }

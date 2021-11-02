@@ -6,18 +6,18 @@ type DataSelectionProps = {
   dataSource: DataSource,
   onSymbolChange: (symbol: string) => void,
   onIntervalChange: (interval: string) => void
-}
+};
 type DataSelectionState = {
   symbols: string[],
   intervals: string[]
-}
+};
 export class DataSelection extends React.Component<DataSelectionProps, DataSelectionState> {
   state = {
     symbols: [],
     intervals: ['1m', '5m', '15m', '1h', '1d'],
-  }
+  };
 
-  async componentDidMount(): Promise<void|Error> {
+  async componentDidMount(): Promise<void | Error> {
     this.props.dataSource.fetchSymbols()
       .then((data) => {
         this.setState({ symbols: data });
@@ -26,13 +26,13 @@ export class DataSelection extends React.Component<DataSelectionProps, DataSelec
       });
   }
 
-  handleSymbolChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  handleSymbolChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     this.props.onSymbolChange(e.target.value);
-  }
+  };
 
-  handleIntervalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  handleIntervalChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     this.props.onIntervalChange(e.target.value);
-  }
+  };
 
   render(): React.ReactNode {
     return (

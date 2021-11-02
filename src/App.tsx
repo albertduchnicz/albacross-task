@@ -11,7 +11,7 @@ type AppState = {
   symbol: string,
   interval: string,
   chartColor: string
-}
+};
 export class App extends React.Component {
   state: AppState = {
     symbol: '',
@@ -19,19 +19,19 @@ export class App extends React.Component {
     chartColor: '#000',
   };
 
-  handleSymbolChange = (symbol: string) => {
-    this.setState({ symbol });
-  }
-
-  handleIntervalChange = (interval: string) => {
-    this.setState({ interval });
-  }
-
-  handleChartColorChange = (hexcode: string) => {
-    this.setState({ chartColor: hexcode });
-  }
-
   private dataProvider = new BinanceDataProvider();
+
+  handleSymbolChange = (symbol: string): void => {
+    this.setState({ symbol });
+  };
+
+  handleIntervalChange = (interval: string): void => {
+    this.setState({ interval });
+  };
+
+  handleChartColorChange = (hexcode: string): void => {
+    this.setState({ chartColor: hexcode });
+  };
 
   render(): React.ReactNode {
     return (
