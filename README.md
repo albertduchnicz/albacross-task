@@ -6,12 +6,12 @@ Binance endpoints used:
 ```
 GET api/v3/exchangeInfo
 ```
-Get list of cryptocurrency pair (eg. ETHBTC).
+Gets list of cryptocurrency pairs (eg. ETHBTC, BTCUSDT).
 
 ```
 GET /api/v3/klines
 ```
-Get last 500 prices of a cryptocurrency pair.
+Gets last 500 prices of a cryptocurrency pair.
 
 The application lists all cryptocurrency pairs (dynamically loaded) traded on Binance market and draws the price chart for a selected time interval of:
 
@@ -43,7 +43,7 @@ Pros:
 * a mix of modern, well regarded technologies
 * full development environment
 * TypeScript client and server side
-* deployment tool
+* deployment tool with dev and prod configuration
 * well structured project
 * testing environment ready
 Cons:
@@ -53,7 +53,7 @@ Cons:
 Future improvements:
 * more automated tests
 * new features, use more Binance API endpoints
-* database for storing Binance data
+* database for caching Binance data
 
 ## Installation, building and testing
 
