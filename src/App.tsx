@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/app.css';
 import { Header } from './components/Header';
 import { ColorPicker } from './components/ColorPicker';
@@ -7,54 +7,31 @@ import { MyChart } from './components/Chart';
 import { Footer } from './components/Footer';
 import { BinanceDataProvider } from './services';
 
-type AppState = {
-  symbol: string,
-  interval: string,
-  chartColor: string
+export const App = (): JSX.Element => {
+  const [dataProvider] = useState(new BinanceDataProvider());
+  const [symbol, setSymbol] = useState('');
+  const [interval, setInterval] = useState('');
+  const [chartColor, setChartColor] = useState('#000');
+  return (
+    <>
+      <Header />
+      <div className="Navigation">
+        <ColorPicker onColorChange={setChartColor} />
+        <DataSelection
+          onSymbolChange={setSymbol}
+          onIntervalChange={setInterval}
+          dataSource={dataProvider}
+        />
+      </div>
+      <div className="Content">
+        <MyChart
+          symbol={symbol}
+          interval={interval}
+          color={chartColor}
+          dataSource={dataProvider}
+        />
+      </div>
+      <Footer />
+    </>
+  );
 };
-export class App extends React.Component {
-  state: AppState = {
-    symbol: '',
-    interval: '',
-    chartColor: '#000',
-  };
-
-  private dataProvider = new BinanceDataProvider();
-
-  handleSymbolChange = (symbol: string): void => {
-    this.setState({ symbol });
-  };
-
-  handleIntervalChange = (interval: string): void => {
-    this.setState({ interval });
-  };
-
-  handleChartColorChange = (hexcode: string): void => {
-    this.setState({ chartColor: hexcode });
-  };
-
-  render(): React.ReactNode {
-    return (
-      <>
-        <Header />
-        <div className="Navigation">
-          <ColorPicker onColorChange={this.handleChartColorChange} />
-          <DataSelection
-            onSymbolChange={this.handleSymbolChange}
-            onIntervalChange={this.handleIntervalChange}
-            dataSource={this.dataProvider}
-          />
-        </div>
-        <div className="Content">
-          <MyChart
-            symbol={this.state.symbol}
-            interval={this.state.interval}
-            color={this.state.chartColor}
-            dataSource={this.dataProvider}
-          />
-        </div>
-        <Footer />
-      </>
-    );
-  }
-}

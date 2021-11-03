@@ -25,7 +25,6 @@
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "import/prefer-default-export": "off",
-    "react/destructuring-assignment": ["error", "never", { "ignoreClassFields": true }],
     "react/state-in-constructor" : ["error", "never"],
     "import/no-extraneous-dependencies": ["error", { "devDependencies":["**/webpack.*.ts", "**/*.test.ts", "**/*.test.tsx"]}],
     "jest/no-disabled-tests": "warn",

@@ -27,13 +27,13 @@ afterEach(() => {
   }
 });
 
-it('checks if compoment gets initialized', async () => {
+it('checks if component gets initialized', async () => {
   const handleSymbolChange = jest.fn();
   const handleIntervalChange = jest.fn();
   expect(container).not.toBeNull();
   if (container) {
-    dataProvider.fetchSymbols.mockResolvedValue(LIST_OF_SYMBOLS);
-    act(() => {
+    await act(async () => {
+      await dataProvider.fetchSymbols.mockResolvedValue(LIST_OF_SYMBOLS);
       render(<DataSelection
         dataSource={dataProvider}
         onSymbolChange={handleSymbolChange}
@@ -58,8 +58,8 @@ it('checks if symbol can be changed and onSymbolChange and onIntervalChange get 
     const handleIntervalChange = jest.fn();
     expect(container).not.toBeNull();
     if (container) {
-      dataProvider.fetchSymbols.mockResolvedValue(LIST_OF_SYMBOLS);
-      act(() => {
+      await act(async () => {
+        await dataProvider.fetchSymbols.mockResolvedValue(LIST_OF_SYMBOLS);
         render(<DataSelection
           dataSource={dataProvider}
           onSymbolChange={handleSymbolChange}
@@ -86,8 +86,8 @@ it('checks if interval can be changed and onSymbolChange and onIntervalChange ge
     const handleIntervalChange = jest.fn();
     expect(container).not.toBeNull();
     if (container) {
-      dataProvider.fetchSymbols.mockResolvedValue(LIST_OF_SYMBOLS);
-      act(() => {
+      await act(async () => {
+        await dataProvider.fetchSymbols.mockResolvedValue(LIST_OF_SYMBOLS);
         render(<DataSelection
           dataSource={dataProvider}
           onSymbolChange={handleSymbolChange}
