@@ -1,3 +1,5 @@
+**!!!Check out!!!** code refactored with functional components on branch [functional-components](https://github.com/albertduchnicz/albacross-task/tree/functional-components).
+
 # Recruitment task for Albacross
 
 An interactive data visualisation frontend application using REACT and [Binance public API](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md). 
