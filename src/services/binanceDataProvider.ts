@@ -9,39 +9,33 @@ export class BinanceDataProvider implements DataSource {
   async fetchSymbols(): Promise<string[]> {
     const response = await fetch(`${this.url}/exchangeInfo`);
     const data = await response.json();
-    const symbols = [];
-    for (let i = 0; i < data.symbols.length; i += 1) {
-      symbols.push(data.symbols[i].symbol);
-    }
-    return symbols;
+    return data.symbols.map(({ symbol } : { symbol: string }) => symbol);
   }
 
   async fetchPrices(symbol: string, interval: string):
   Promise<{ timestamps: string[], prices: number[] }> {
     if (symbol === '' || interval === '') {
-      return Promise.reject();
+      throw new Error('Missing symbol or interval');
     }
-    try {
-      const response = await fetch(`${this.url}/klines?symbol=${symbol}&interval=${interval}`);
-      const klines = await response.json();
-      const timestamps = [];
-      const prices = [];
-      for (let i = 0; i < klines.length; i += 1) {
-        const date = new Date(klines[i][0]);
-        let formattedDate;
-        switch (interval) {
-          case '1m':
-          case '5m': formattedDate = moment(date).format('HH:mm'); break;
-          case '1h': formattedDate = moment(date).format('M/DD HH:mm'); break;
-          case '1d': formattedDate = moment(date).format('M/DD'); break;
-          default: formattedDate = moment(date).format('M/DD HH:mm');
-        }
-        timestamps.push(formattedDate);
-        prices.push(parseFloat(klines[i][4]));
-      }
-      return await Promise.resolve({ timestamps, prices });
-    } catch (e) {
-      return Promise.reject(e);
+    const response = await fetch(`${this.url}/klines?symbol=${symbol}&interval=${interval}`);
+    const klines = await response.json();
+    const timestamps = [] as string[];
+    const prices = [] as number[];
+    klines.forEach((kline: (Date | string)[]) => {
+      const date = new Date(kline[0] as Date);
+      timestamps.push(BinanceDataProvider.formatDate(date, interval));
+      prices.push(parseFloat(kline[4] as string));
+    });
+    return { timestamps, prices };
+  }
+
+  static formatDate(date: Date, interval: string): string {
+    switch (interval) {
+      case '1m':
+      case '5m': return moment(date).format('HH:mm'); break;
+      case '1h': return moment(date).format('M/DD HH:mm'); break;
+      case '1d': return moment(date).format('M/DD'); break;
+      default: return moment(date).format('M/DD HH:mm');
     }
   }
 }
