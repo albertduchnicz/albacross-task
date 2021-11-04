@@ -3,7 +3,7 @@ import './styles/app.css';
 import { Header } from './components/Header';
 import { ColorPicker } from './components/ColorPicker';
 import { DataSelection } from './components/DataSelection';
-import { MyChart } from './components/Chart';
+import { Chart } from './components/Chart';
 import { Footer } from './components/Footer';
 import { BinanceDataProvider } from './services';
 
@@ -46,7 +46,7 @@ export class App extends React.Component {
           />
         </div>
         <div className="Content">
-          <MyChart
+          <Chart
             symbol={this.state.symbol}
             interval={this.state.interval}
             color={this.state.chartColor}

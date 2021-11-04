@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { DataSource } from '../../services/dataSource';
 import myCss from './chart.module.css';
 
-type MyChartProps = {
+type ChartProps = {
   symbol: string,
   interval: string,
   color: string,
@@ -14,7 +14,7 @@ type ChartState = {
   prices: number[]
 };
 
-export class MyChart extends React.Component<MyChartProps, ChartState> {
+export class Chart extends React.Component<ChartProps, ChartState> {
   state = {
     labels: [],
     prices: [],
